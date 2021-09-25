@@ -5,7 +5,8 @@ import 'package:lottie/lottie.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
-  TransactionList(this.transactions);
+  final Function deleteTx;
+  TransactionList(this.transactions, this.deleteTx);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,10 @@ class TransactionList extends StatelessWidget {
                       child: Padding(padding: EdgeInsets.all(5),
                         
                         child: FittedBox(child: Text('${transactions[index].amount}\€'))),
-                    ), title: Text(transactions[index].title,style: TextStyle(),),subtitle: Text(DateFormat.MMMd().format(transactions[index].date) ),
+                    ), title: Text(transactions[index].title,style: TextStyle(),),subtitle: Text(DateFormat.MMMd().format(transactions[index].date) ),trailing: IconButton(onPressed: (){deleteTx(transactions[index].id);},
+                      icon: Icon(Icons.delete),
+                    color: Colors.red,
+                    ),
                   ),
                 );
               },
